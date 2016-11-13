@@ -1,2 +1,1 @@
-git init...
-codingke qiulongze
+if you study hard,you will make progress everyday
