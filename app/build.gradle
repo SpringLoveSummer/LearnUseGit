@@ -1,0 +1,84 @@
+apply plugin: 'com.android.application'
+
+android {
+//    signingConfigs {
+//        config {
+//
+//        }
+//    }
+    compileSdkVersion 28
+    defaultConfig {
+        applicationId "com.github.rrj"
+        minSdkVersion 15
+        targetSdkVersion 28
+        versionCode 1
+        versionName "1.0"
+        testInstrumentationRunner "android.support.test.runner.AndroidJUnitRunner"
+        manifestPlaceholders = [app_name         : "仁仁家", icon: "@mipmap/icon", welcome_bg:
+                "@mipmap/rrj_welcome", tint_color: "@color/home_bg", load_url: "https://www.taobao.com/"]
+    }
+    signingConfigs {
+
+        release {
+//            File strFile = new File("../../Keystore/Release/release.jks")
+//            storeFile file(strFile)
+//            storePassword "storeRelease1234567890"
+//            keyPassword "keyRelease1234567890"
+//            keyAlias "releasekey"
+            // println strFile.absolutePath;
+            keyAlias 'key0'
+            keyPassword '2010210'
+            File strFile = new File("dhc.jks")
+            storeFile file(strFile)
+            storePassword '2010210'
+        }
+    }
+    buildTypes {
+        release {
+            signingConfig  signingConfigs.release
+            minifyEnabled false
+            proguardFiles getDefaultProguardFile('proguard-android-optimize.txt'), 'proguard-rules.pro'
+        }
+    }
+
+
+//    //多渠道配置
+//    productFlavors {
+//        //四季易购
+//        SJYG {
+//            applicationId "com.github.sjyg"
+//            manifestPlaceholders = [app_name: "四季易购", icon: "@mipmap/sjyg_icon", welcome_bg:
+//                    "@mipmap/sjyg_welcome", tint_color: "@color/white", load_url: "http://www.baidu.com/"]
+//            resValue("string" , "key","123")
+//        }
+//
+//        //库乐购
+//        KLG {
+//            applicationId "com.github.klg"
+//            manifestPlaceholders = [app_name         : "库乐购", icon: "@mipmap/klg_icon", welcome_bg:
+//                    "@mipmap/klg_welcome", tint_color: "@color/home_bg", load_url: "https://www.jd.com/"]
+//        }
+//        //仁仁家
+//        RRJ {
+//
+//
+//        }
+//    }
+    lintOptions {
+        abortOnError false
+        checkReleaseBuilds false
+        // 防止在发布的时候出现因MissingTranslation导致Build Failed!
+        disable 'MissingTranslation'
+    }
+}
+
+
+
+dependencies {
+    implementation fileTree(dir: 'libs', include: ['*.jar'])
+    implementation 'com.android.support:appcompat-v7:28.0.0'
+    implementation 'com.android.support.constraint:constraint-layout:1.1.3'
+    testImplementation 'junit:junit:4.12'
+    androidTestImplementation 'com.android.support.test:runner:1.0.2'
+    androidTestImplementation 'com.android.support.test.espresso:espresso-core:3.0.2'
+}
